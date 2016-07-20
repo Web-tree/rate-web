@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Rate - Web-Tree.org</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <!--<link rel="stylesheet" href="css/bootstrap/bootstrap.css" />-->
+    <script src="https://code.angularjs.org/2.0.0-beta.17/angular2-polyfills.js"></script>
+    <script src="https://code.angularjs.org/tools/system.js"></script>
+    <script src="https://code.angularjs.org/tools/typescript.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/Rx.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/angular2.dev.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/http.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.17/router.dev.js"></script>
+
+    <script>
+        System.config({
+            transpiler: 'typescript',
+            typescriptOptions: { emitDecoratorMetadata: true },
+            packages: {'app': {defaultExtension: 'ts'}}
+        });
+        System.import('app/main').then(null, console.error.bind(console));
+    </script>
+
+</head>
+<body>
+    <rate-app>Loading...</rate-app>
+</body>
+</html>
