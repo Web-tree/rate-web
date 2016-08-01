@@ -17,6 +17,8 @@
 
     <properties>
         <start-class>org.webtree.rate.web.boot.Application</start-class>
+        <lombok-version>1.16.10</lombok-version>
+        <jackson-version>2.6.5</jackson-version>
     </properties>
 
     <dependencies>
@@ -37,15 +39,50 @@
             <artifactId>springloaded</artifactId>
             <version>1.2.0.RELEASE</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-devtools</artifactId>-->
-            <!--<version>1.3.3.RELEASE</version>-->
-            <!--<optional>true</optional>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok-version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.0.0-beta-4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-collections</artifactId>
+            <version>r03</version>
+        </dependency>
     </dependencies>
 
+
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.3.0.Final</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -68,6 +105,39 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--java to typescript-->
+            <plugin>
+                <groupId>cz.habarta.typescript-generator</groupId>
+                <artifactId>typescript-generator-maven-plugin</artifactId>
+                <version>1.10.212</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <jsonLibrary>jackson2</jsonLibrary>
+                            <classPatterns>
+                                <pattern>org.webtree.rate.web.model.*</pattern>
+                            </classPatterns>
+                            <!--<outputFile>target/rest</outputFile>-->
+                            <outputKind>global</outputKind>
+                            <!--<classPatterns>-->
+                            <!--<pattern>-->
+                            <!--org.webtree.rate.web.model.*-->
+                            <!--</pattern>-->
+                            <!--</classPatterns>-->
+                            <outputFile>src/main/resources/public/app/model.d.ts</outputFile>
+                            <!--<namespace>Rest</namespace>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--node_modules-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -103,6 +173,26 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--proto to java-->
+            <!--<plugin>-->
+                <!--<groupId>org.xolstice.maven.plugins</groupId>-->
+                <!--<artifactId>protobuf-maven-plugin</artifactId>-->
+                <!--<version>0.5.0</version>-->
+                <!--<extensions>true</extensions>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>compile</goal>-->
+                            <!--<goal>test-compile</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<protocArtifact>com.google.protobuf:protoc:2.6.1:exe:${os.detected.classifier}</protocArtifact>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+
         </plugins>
     </build>
 </project>

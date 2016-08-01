@@ -37,5 +37,6 @@ $RECYCLE.BIN/
 *.iml
 .idea
 
-# npm packagies
-src/main/resources/node_modules
+# js generated files
+/src/main/resources/public/node_modules/
+/src/main/resources/public/app/model.d.ts

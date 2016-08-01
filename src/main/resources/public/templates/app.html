@@ -1,0 +1,14 @@
+<h1>Rate service</h1>
+Navigation
+<div>
+    <a routerLink="/">home</a>
+    <a routerLink="/user">user</a>
+</div>
+<div *ngIf="!isAuth()">
+<a (click)="login()">Login</a>
+</div>
+<div *ngIf="isAuth()">
+    <div *ngIf="getCurrentUser()">User id: {{getCurrentUser().id}}</div>
+    <a (click)="logout()">Logout</a>
+</div>
+<router-outlet></router-outlet>

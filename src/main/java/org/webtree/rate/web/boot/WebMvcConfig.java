@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.resource.PathResourceResolver;
@@ -37,6 +38,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .setCachePeriod(cachePeriod);
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/public/js/")
+                .setCachePeriod(cachePeriod);
+        registry.addResourceHandler("/templates/**")
+                .addResourceLocations("classpath:/public/templates/")
                 .setCachePeriod(cachePeriod);
 
         registry.addResourceHandler("/**")
