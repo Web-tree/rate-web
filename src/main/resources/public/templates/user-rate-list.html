@@ -1,0 +1,7 @@
+<h1>User rate list</h1>
+<ul>
+    <li *ngFor="let user of users">
+        Rate: {{user.rate}}
+        <a [routerLink]="['/user/details/', user.id]">{{user.displayName}}</a>
+    </li>
+</ul>

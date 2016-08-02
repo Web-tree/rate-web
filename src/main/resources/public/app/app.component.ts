@@ -10,6 +10,8 @@ import {UserService} from "./user.service";
 })
 export class AppComponent {
     constructor(private userService: UserService) {
+        //TODO: Stub. Remove.
+        this.login();
     }
 
     public login(): void {

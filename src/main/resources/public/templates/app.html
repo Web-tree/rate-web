@@ -2,13 +2,13 @@
 Navigation
 <div>
     <a routerLink="/">home</a>
-    <a routerLink="/user">user</a>
+    <a routerLink="/user/rate/list">User top</a>
 </div>
 <div *ngIf="!isAuth()">
 <a (click)="login()">Login</a>
 </div>
 <div *ngIf="isAuth()">
-    <div *ngIf="getCurrentUser()">User id: {{getCurrentUser().id}}</div>
+    <div *ngIf="getCurrentUser()"><a [routerLink]="['/user/details/', getCurrentUser().id]">{{getCurrentUser().displayName}}</a></div>
     <a (click)="logout()">Logout</a>
 </div>
 <router-outlet></router-outlet>
