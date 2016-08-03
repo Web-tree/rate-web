@@ -1,16 +1,20 @@
 package org.webtree.rate.web.controller;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.User;
+import org.webtree.rate.web.service.UserService;
 import org.webtree.rate.web.utils.ResponseUtil;
 
 import java.util.List;
 
+import static org.webtree.rate.web.utils.ResponseUtil.createOkResponse;
 import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 
 /**
@@ -20,15 +24,11 @@ import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 @RestController
 @RequestMapping("/rest/user")
 public class UserController {
+    private UserService userService;
+
     @RequestMapping("/info")
     public ApiResponse<User> getInfo(@RequestParam Long userId) {
-        //TODO: remove this stub
-        User user = new User();
-        user.setId(userId);
-        user.setLogin("testUser");
-        user.setDisplayName("Test User");
-        user.setRate(5L);
-        return wrapResponse(user);
+        return wrapResponse(userService.findUserById(userId));
     }
 
     @RequestMapping("/rate-list")
@@ -46,5 +46,18 @@ public class UserController {
         user3.setDisplayName("Test user 3");
         user3.setLogin("testUser3");
         return wrapResponse(Lists.asList(user1, new User[]{user2, user3}));
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.PUT)
+    public ApiResponse register(@RequestParam String login, @RequestParam String password) {
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        return wrapResponse(userService.createUser(user));
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

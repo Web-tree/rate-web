@@ -12,7 +12,6 @@ export class UserListComponent {
     private sub: any;
 
     constructor(private userService: UserService, private route: ActivatedRoute) {
-        // this.userService.findUser(2).subscribe(user => this.user = user);
     }
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
