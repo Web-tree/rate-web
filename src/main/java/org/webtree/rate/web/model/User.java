@@ -1,10 +1,9 @@
 package org.webtree.rate.web.model;
 
 import lombok.Data;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.List;
 
@@ -21,10 +20,10 @@ public class User {
     private String password;
     private String displayName;
 
-    @RelatedTo(type = "CREATION")
+    @Relationship(type = "CREATION")
     private List<Item> items;
 
-    private Long rate;
+    private Long rate = 0L;
 
 
 }

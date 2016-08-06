@@ -1,8 +1,8 @@
 package org.webtree.rate.web.model;
 
 import lombok.Data;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 /**
  * @author Max

@@ -33,19 +33,7 @@ public class UserController {
 
     @RequestMapping("/rate-list")
     public ApiResponse<List<User>> getRateList() {
-        //TODO: remove this stub
-        User user1 = getInfo(1L).getData();
-        User user2 = getInfo(1L).getData();
-        User user3 = getInfo(1L).getData();
-        user2.setId(2L);
-        user2.setRate(3L);
-        user2.setDisplayName("Test user 2");
-        user2.setLogin("testUser2");
-        user2.setId(3L);
-        user3.setRate(1L);
-        user3.setDisplayName("Test user 3");
-        user3.setLogin("testUser3");
-        return wrapResponse(Lists.asList(user1, new User[]{user2, user3}));
+        return wrapResponse(userService.getUserRankTop());
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.PUT)
@@ -53,6 +41,7 @@ public class UserController {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
+        user.setDisplayName(login);
         return wrapResponse(userService.createUser(user));
     }
 
