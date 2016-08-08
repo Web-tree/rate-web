@@ -28,7 +28,8 @@
     "zone.js": "^0.6.12",
     "angular2-in-memory-web-api": "0.0.14",
     "bootstrap": "^3.3.7",
-    "typescript-collections": "1.0.4"
+    "typescript-collections": "1.0.4",
+    "bootflat": "2.0.4"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
