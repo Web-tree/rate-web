@@ -28,7 +28,7 @@ export class UserService extends Service {
 
     public login(): void {
         //TODO: remove stub
-        this.findUser(1).subscribe(user => this.user = user);
+        this.findUser(12).subscribe(user => this.user = user);
     }
 
     public logout(): void {
