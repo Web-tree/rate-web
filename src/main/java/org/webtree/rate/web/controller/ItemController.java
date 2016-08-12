@@ -7,12 +7,15 @@ package org.webtree.rate.web.controller;
 
 import com.google.common.collect.Lists;
 import com.google.protobuf.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.Item;
 import org.webtree.rate.web.model.Project;
 import org.webtree.rate.web.model.User;
+import org.webtree.rate.web.repository.ItemRepository;
+import org.webtree.rate.web.service.ItemService;
 import org.webtree.rate.web.utils.ResponseUtil;
 
 import java.util.List;
@@ -22,10 +25,16 @@ import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 @RestController
 @RequestMapping("/rest/item")
 public class ItemController {
+    private final ItemService itemService;
+
+    @Autowired
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
     public ApiResponse<Item> createItem(@RequestBody Item item) {
-        item.setId(123L);
-        return wrapResponse(item);
+        return wrapResponse(itemService.create(item));
     }
 
     @RequestMapping("/get/{id}")

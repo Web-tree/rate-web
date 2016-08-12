@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @NodeEntity
-public class Item {
+public class Item implements GraphModel {
     @GraphId
     private Long id;
     private String name;
