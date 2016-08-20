@@ -1,10 +1,15 @@
 package org.webtree.rate.web.model;
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,10 +18,10 @@ import java.util.List;
  */
 @Data
 @NodeEntity
-public class User implements GraphModel {
+public class User implements GraphModel, UserDetails {
     @GraphId
     private Long id;
-    private String login;
+    private String username;
     private String password;
     private String displayName;
 
@@ -25,5 +30,30 @@ public class User implements GraphModel {
 
     private Long rate = 0L;
 
+    private List<GrantedAuthority> authorities = Lists.newArrayList(new SimpleGrantedAuthority("ROLE_USER"));
 
+    @Override
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

@@ -8,6 +8,7 @@ package org.webtree.rate.web.controller;
 import com.google.common.collect.Lists;
 import com.google.protobuf.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
@@ -33,6 +34,7 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
+    @Secured("ROLE_USER")
     public ApiResponse<Item> createItem(@RequestBody Item item) {
         return wrapResponse(itemService.create(item));
     }

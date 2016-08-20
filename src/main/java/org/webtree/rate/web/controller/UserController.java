@@ -1,8 +1,7 @@
 package org.webtree.rate.web.controller;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,11 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.UserService;
-import org.webtree.rate.web.utils.ResponseUtil;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtil.createOkResponse;
 import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 
 /**
@@ -37,11 +34,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.PUT)
-    public ApiResponse register(@RequestParam String login, @RequestParam String password) {
+    public ApiResponse register(@RequestParam String username, @RequestParam String password) {
         User user = new User();
-        user.setLogin(login);
+        user.setUsername(username);
         user.setPassword(password);
-        user.setDisplayName(login);
+        user.setDisplayName(username);
         return wrapResponse(userService.createUser(user));
     }
 
