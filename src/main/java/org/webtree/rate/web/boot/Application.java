@@ -10,17 +10,20 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  *         Created on 3/13/2016.
  */
 @SpringBootApplication
-//@EnableWebMvc
 @ComponentScan({
-    "org.webtree.rate.web.controller",
-    "org.webtree.rate.web.service",
+        "org.webtree.rate.web.controller",
+        "org.webtree.rate.web.handler",
+        "org.webtree.rate.web.security",
+        "org.webtree.rate.web.service",
+        "org.webtree.rate.web.utils",
 })
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(new Object[]{
                 Application.class,
                 WebMvcConfig.class,
-                Neo4jConfig.class
+                Neo4jConfig.class,
+                WebSecurityConfiguration.class
         }, args);
     }
 }
