@@ -2,6 +2,7 @@ package org.webtree.rate.web.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.springframework.http.HttpStatus;
 
 import java.net.HttpURLConnection;
 
@@ -14,44 +15,25 @@ public class ApiResponseStatus {
     @JsonInclude(Include.NON_EMPTY)
     private String message;
 
-    public static enum ApiStatusCode {
-        // General codes
-        OK(HttpURLConnection.HTTP_OK),
-        UNAUTHORIZED(HttpURLConnection.HTTP_UNAUTHORIZED),
-        PRECONDITION(HttpURLConnection.HTTP_PRECON_FAILED),
-        FORBIDDEN(HttpURLConnection.HTTP_FORBIDDEN),
-        ERROR(HttpURLConnection.HTTP_INTERNAL_ERROR);
-        private int code;
-
-        ApiStatusCode(int code) {
-            this.code = code;
-        }
-
-        public int getCode() {
-
-            return code;
-        }
-    }
-
     public static ApiResponseStatus getOkStatus() {
-        return new ApiResponseStatus(ApiStatusCode.OK);
+        return new ApiResponseStatus(HttpStatus.OK);
     }
 
     public static ApiResponseStatus getErrorStatus() {
-        return new ApiResponseStatus(ApiStatusCode.ERROR);
+        return new ApiResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public static ApiResponseStatus getStatus(ApiStatusCode code) {
+    public static ApiResponseStatus getStatus(HttpStatus code) {
         return new ApiResponseStatus(code);
     }
 
-    public ApiResponseStatus(ApiStatusCode code, String message) {
-        this.code = code.getCode();
+    public ApiResponseStatus(HttpStatus code, String message) {
+        this.code = code.value();
         this.message = message;
     }
 
-    public ApiResponseStatus(ApiStatusCode code) {
-        this.code = code.getCode();
+    public ApiResponseStatus(HttpStatus code) {
+        this.code = code.value();
     }
 
     public String getMessage() {

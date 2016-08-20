@@ -1,5 +1,6 @@
 package org.webtree.rate.web.utils;
 
+import org.springframework.http.HttpStatus;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.ApiResponseStatus;
 
@@ -21,11 +22,11 @@ public final class ResponseUtil {
         return new ApiResponse<>(getOkStatus(), data);
     }
 
-    public static <T> ApiResponse<T> wrapResponse(ApiStatusCode code, String message) {
-        return new ApiResponse<>(new ApiResponseStatus(code, message));
+    public static <T> ApiResponse<T> wrapResponse(HttpStatus status, String message) {
+        return new ApiResponse<>(new ApiResponseStatus(status, message));
     }
 
-    public static <T> ApiResponse<T> wrapResponse(ApiStatusCode code, String message, T data) {
-        return new ApiResponse<>(new ApiResponseStatus(code, message), data);
+    public static <T> ApiResponse<T> wrapResponse(HttpStatus status, String message, T data) {
+        return new ApiResponse<>(new ApiResponseStatus(status, message), data);
     }
 }
