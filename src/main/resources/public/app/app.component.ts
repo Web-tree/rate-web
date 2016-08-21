@@ -1,32 +1,34 @@
-import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import {Component} from "@angular/core";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 import {UserService} from "./user.service";
+import {SecurityService} from "./security.service";
 
 @Component({
     selector: 'rate-app',
     templateUrl: 'templates/app.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [UserService]
+    providers: [UserService, SecurityService]
 })
 export class AppComponent {
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private securityService: SecurityService) {
         //TODO: Stub. Remove.
-        this.login();
+        this.signIn();
     }
 
-    public login(): void {
-        this.userService.login();
+    public signIn(): void {
+        // TODO: remove stub
+        this.securityService.signIn("qwe", "test");
     }
 
-    public logout(): void {
-        this.userService.logout();
+    public signOut(): void {
+        this.securityService.signOut();
     }
 
-    public isAuth(): boolean {
-        return this.userService.isAuth();
+    public checkAuth(): boolean {
+        return this.securityService.checkAuth();
     }
 
     public getCurrentUser(): User {
-        return this.userService.getCurrentUser();
+        return this.securityService.getCurrentUser();
     }
 }
