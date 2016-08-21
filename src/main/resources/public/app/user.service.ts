@@ -5,7 +5,6 @@ import {Observable} from "rxjs";
 import * as Collections from "typescript-collections";
 @Injectable()
 export class UserService extends Service {
-    private user: User;
     constructor(private http: Http) {
         super();
     }
@@ -20,26 +19,16 @@ export class UserService extends Service {
             .map((r: Response) => r.json().data as User);
     }
 
+    public loadCurrentUser(token): Observable<User> {
+        //TODO: implement
+        return this.http
+            .get(this.url('currentUser?token=' + token))
+            .map((r: Response) => r.json().data as User);
+    }
+
     public getRateList(): Observable<Collections.List<User>> {
         return this.http
             .get(this.url('rate-list'))
             .map((r: Response) => r.json().data as User);
-    }
-
-    public login(): void {
-        //TODO: remove stub
-        this.findUser(12).subscribe(user => this.user = user);
-    }
-
-    public logout(): void {
-        this.user = null;
-    }
-
-    public isAuth(): boolean {
-        return !!this.user;
-    }
-
-    public getCurrentUser(): User {
-        return this.user;
     }
 }
