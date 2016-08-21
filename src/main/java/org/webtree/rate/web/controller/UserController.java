@@ -2,8 +2,8 @@ package org.webtree.rate.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
@@ -33,13 +33,10 @@ public class UserController {
         return wrapResponse(userService.getUserRankTop());
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.PUT)
-    public ApiResponse register(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setDisplayName(username);
-        return wrapResponse(userService.createUser(user));
+    @RequestMapping("/currentUser")
+    @Secured("ROLE_USER")
+    public ApiResponse<User> getCurrentUser() {
+        return wrapResponse((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     @Autowired

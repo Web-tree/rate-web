@@ -1,5 +1,6 @@
 package org.webtree.rate.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import lombok.Data;
 import org.neo4j.ogm.annotation.GraphId;
@@ -9,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -22,6 +22,7 @@ public class User implements GraphModel, UserDetails {
     @GraphId
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     private String displayName;
 
@@ -39,21 +40,21 @@ public class User implements GraphModel, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
