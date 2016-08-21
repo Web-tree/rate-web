@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import org.springframework.data.neo4j.template.Neo4jOperations;
+import org.springframework.data.neo4j.template.Neo4jTemplate;
+import org.webtree.rate.web.init.IndexCreator;
 
 /**
  * @author Max
@@ -18,9 +21,13 @@ public class Neo4jConfig extends Neo4jConfiguration {
         return new SessionFactory("org.webtree.rate.web.model");
     }
 
-//    @Bean
-//    GraphDatabaseService graphDatabaseService() {
-//        return new GraphDatabaseFactory().newEmbeddedDatabase("rate-web.db");
-////        return new Graph
-//    }
+    @Bean
+    public Neo4jOperations neo4jTemplate() throws Exception {
+        return new Neo4jTemplate(getSession());
+    }
+
+    @Bean
+    public IndexCreator indexCreator() throws Exception {
+        return new IndexCreator(neo4jTemplate());
+    }
 }

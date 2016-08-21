@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,6 +20,7 @@ import java.util.List;
 public class User implements GraphModel, UserDetails {
     @GraphId
     private Long id;
+//    @Indexed(unique = true)
     private String username;
     private String password;
     private String displayName;
@@ -30,7 +30,7 @@ public class User implements GraphModel, UserDetails {
 
     private Long rate = 0L;
 
-    private List<GrantedAuthority> authorities = Lists.newArrayList(new SimpleGrantedAuthority("ROLE_USER"));
+    private transient List<GrantedAuthority> authorities = Lists.newArrayList(new SimpleGrantedAuthority("ROLE_USER"));
 
     @Override
     public List<GrantedAuthority> getAuthorities() {
