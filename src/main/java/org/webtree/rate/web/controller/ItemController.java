@@ -6,22 +6,18 @@ package org.webtree.rate.web.controller;
  */
 
 import com.google.common.collect.Lists;
-import com.google.protobuf.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.Item;
 import org.webtree.rate.web.model.Project;
 import org.webtree.rate.web.model.User;
-import org.webtree.rate.web.repository.ItemRepository;
 import org.webtree.rate.web.service.ItemService;
-import org.webtree.rate.web.utils.ResponseUtil;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
 
 @RestController
 @RequestMapping("/rest/item")
