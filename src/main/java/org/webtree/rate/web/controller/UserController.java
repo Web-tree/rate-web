@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.UserService;
@@ -27,8 +24,8 @@ import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
 public class UserController {
     private UserService userService;
 
-    @RequestMapping("/info")
-    public ApiResponse<User> getInfo(@RequestParam Long userId) {
+    @RequestMapping("/{userId}")
+    public ApiResponse<User> getInfo(@PathVariable("userId") Long userId) {
         User user = userService.findUserById(userId);
         if (user == null) {
             return wrapResponse(HttpStatus.NOT_FOUND, "User " + userId + " not found");
