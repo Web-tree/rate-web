@@ -29,7 +29,11 @@ public class UserController {
 
     @RequestMapping("/info")
     public ApiResponse<User> getInfo(@RequestParam Long userId) {
-        return wrapResponse(userService.findUserById(userId));
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            return wrapResponse(HttpStatus.NOT_FOUND, "User " + userId + " not found");
+        }
+        return wrapResponse(user);
     }
 
     @RequestMapping("/rate-list")
