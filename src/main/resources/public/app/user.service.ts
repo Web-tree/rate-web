@@ -3,6 +3,7 @@ import {Service} from "./service";
 import {Response, Http} from "@angular/http";
 import {Observable} from "rxjs";
 import * as Collections from "typescript-collections";
+import {User} from "./model";
 @Injectable()
 export class UserService extends Service {
     constructor(private http: Http) {

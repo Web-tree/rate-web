@@ -2,18 +2,19 @@ package org.webtree.rate.web.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.Getter;
 
 import java.util.Date;
 
 /**
  * @author Maxim
- * @date $ {DATE}.
  */
+@Getter
 public class ApiResponse<T> {
-    private ApiResponseStatus status;
-    private Date timestamp = new Date();
+    private final ApiResponseStatus status;
+    private final Date timestamp = new Date();
     @JsonInclude(Include.NON_NULL)
-    private T data;
+    private final T data;
 
     public ApiResponse(ApiResponseStatus status, T data) {
         this.status = status;
@@ -21,35 +22,7 @@ public class ApiResponse<T> {
     }
 
     public ApiResponse(ApiResponseStatus status) {
-
         this.status = status;
-    }
-
-    public ApiResponse() {
-
-    }
-
-    public ApiResponseStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ApiResponseStatus status) {
-        this.status = status;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+        this.data = null;
     }
 }

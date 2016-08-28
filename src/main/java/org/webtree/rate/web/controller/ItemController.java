@@ -18,7 +18,7 @@ import org.webtree.rate.web.service.ItemService;
 import java.util.List;
 
 import static org.webtree.rate.web.utils.ResponseUtils.okOrNotFoundResponse;
-import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.okResponse;
 
 @RestController
 @RequestMapping("/rest/item")
@@ -33,7 +33,7 @@ public class ItemController {
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
     @Secured("ROLE_USER")
     public ApiResponse<Item> createItem(@RequestBody Item item) {
-        return wrapResponse(itemService.create(item));
+        return okResponse(itemService.create(item));
     }
 
     @RequestMapping("/get/{id}")
@@ -49,7 +49,7 @@ public class ItemController {
         creator.setDisplayName("test user");
         creator.setId(id);
         item.setCreator(creator);
-        return wrapResponse(Lists.newArrayList(item));
+        return okResponse(Lists.newArrayList(item));
     }
 
     @RequestMapping("/getByProject/{id}")
@@ -60,6 +60,6 @@ public class ItemController {
         project.setUrl("test.url");
         item.setProjects(Lists.newArrayList(project));
         item.setProjects(Lists.newArrayList(project));
-        return wrapResponse(Lists.newArrayList(item));
+        return okResponse(Lists.newArrayList(item));
     }
 }
