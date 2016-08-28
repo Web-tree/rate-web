@@ -10,7 +10,7 @@ import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.UserService;
 import org.webtree.rate.web.utils.TokenUtils;
 
-import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.okResponse;
 
 /**
  * @author Max
@@ -30,7 +30,7 @@ public class SecurityController {
 
     @RequestMapping("/getToken")
     public ApiResponse<String> getToken(@RequestParam String username, @RequestParam String password) {
-        return wrapResponse(tokenUtils.generateToken(username, password));
+        return okResponse(tokenUtils.generateToken(username, password));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.PUT)
@@ -39,6 +39,6 @@ public class SecurityController {
         user.setUsername(username);
         user.setPassword(password);
         user.setDisplayName(username);
-        return wrapResponse(userService.createUser(user));
+        return okResponse(userService.createUser(user));
     }
 }

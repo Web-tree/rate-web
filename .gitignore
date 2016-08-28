@@ -39,4 +39,4 @@ $RECYCLE.BIN/
 
 # js generated files
 /src/main/resources/public/node_modules/
-/src/main/resources/public/app/model.d.ts
+/src/main/resources/public/app/model.ts

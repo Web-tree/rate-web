@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Service} from "./service";
 import {Response, Http} from "@angular/http";
 import {UserService} from "./user.service";
+import {User} from "./model";
 
 @Injectable()
 export class SecurityService extends Service {

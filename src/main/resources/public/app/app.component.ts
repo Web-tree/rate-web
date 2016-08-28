@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {ROUTER_DIRECTIVES} from "@angular/router";
 import {UserService} from "./user.service";
 import {SecurityService} from "./security.service";
+import {User} from "./model";
 
 @Component({
     selector: 'rate-app',
