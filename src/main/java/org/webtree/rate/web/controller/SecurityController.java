@@ -10,7 +10,7 @@ import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.UserService;
 import org.webtree.rate.web.utils.TokenUtils;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
 
 /**
  * @author Max

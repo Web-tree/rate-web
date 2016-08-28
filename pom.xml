@@ -53,10 +53,6 @@
             <artifactId>spring-data-neo4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-neo4j-rest</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.innerloop</groupId>
             <artifactId>java-neo4j-ogm</artifactId>
             <version>0.3.0</version>
@@ -155,14 +151,14 @@
             <plugin>
                 <groupId>cz.habarta.typescript-generator</groupId>
                 <artifactId>typescript-generator-maven-plugin</artifactId>
-                <version>1.10.212</version>
+                <version>1.10.220</version>
                 <executions>
                     <execution>
                         <id>generate</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>process-classes</phase>
+                        <phase>generate-resources</phase>
                         <configuration>
                             <jsonLibrary>jackson2</jsonLibrary>
                             <classPatterns>

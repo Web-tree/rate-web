@@ -1,9 +1,12 @@
 package org.webtree.rate.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
@@ -12,7 +15,8 @@ import org.webtree.rate.web.service.UserService;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.createOkResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
 
 /**
  * @author Max
@@ -37,6 +41,17 @@ public class UserController {
     @Secured("ROLE_USER")
     public ApiResponse<User> getCurrentUser() {
         return wrapResponse((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    }
+
+    @RequestMapping(value = "/isValidUsername", method = RequestMethod.POST)
+    public ApiResponse checkUserName(@RequestParam String username) {
+        if (StringUtils.isEmpty(username)) {
+            return wrapResponse(HttpStatus.BAD_REQUEST, "Username is empty");
+        }
+        if (userService.isUsernameExists(username)) {
+            return wrapResponse(HttpStatus.BAD_REQUEST, "Username already exists");
+        }
+        return createOkResponse();
     }
 
     @Autowired
