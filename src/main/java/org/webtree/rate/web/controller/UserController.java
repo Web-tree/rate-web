@@ -1,6 +1,7 @@
 package org.webtree.rate.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,11 @@ public class UserController {
 
     @RequestMapping("/info")
     public ApiResponse<User> getInfo(@RequestParam Long userId) {
-        return wrapResponse(userService.findUserById(userId));
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            return wrapResponse(HttpStatus.NOT_FOUND, "User " + userId + " not found");
+        }
+        return wrapResponse(user);
     }
 
     @RequestMapping("/rate-list")
