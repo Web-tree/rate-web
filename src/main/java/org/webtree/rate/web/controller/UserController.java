@@ -3,8 +3,8 @@ package org.webtree.rate.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.User;
@@ -23,8 +23,8 @@ import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 public class UserController {
     private UserService userService;
 
-    @RequestMapping("/info")
-    public ApiResponse<User> getInfo(@RequestParam Long userId) {
+    @RequestMapping("/{userId}")
+    public ApiResponse<User> getInfo(@PathVariable("userId") Long userId) {
         return wrapResponse(userService.findUserById(userId));
     }
 
