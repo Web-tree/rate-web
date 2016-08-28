@@ -4,6 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.ApiResponseStatus;
 
+import java.util.Collection;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.webtree.rate.web.model.ApiResponseStatus.getOkStatus;
 
 /**
@@ -32,5 +35,13 @@ public final class ResponseUtils {
 
     public static <T> ApiResponse<T> wrapResponse(HttpStatus status, T data) {
         return new ApiResponse<>(new ApiResponseStatus(status), data);
+    }
+
+    public static <T> ApiResponse<T> okOrNotFoundResponse(String notFoundMessage, T data) {
+        if (data == null || (data instanceof Collection && ((Collection) data).isEmpty())) {
+            return wrapResponse(NOT_FOUND, notFoundMessage);
+        } else {
+            return wrapResponse(data);
+        }
     }
 }

@@ -15,4 +15,8 @@ public class ItemService extends GraphService<Item, ItemRepository> {
     public ItemService(ItemRepository repository) {
         super(repository);
     }
+
+    public Item getById(Long itemId) {
+        return repository.findOne(itemId);
+    }
 }

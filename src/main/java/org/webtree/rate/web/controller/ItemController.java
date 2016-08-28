@@ -17,6 +17,7 @@ import org.webtree.rate.web.service.ItemService;
 
 import java.util.List;
 
+import static org.webtree.rate.web.utils.ResponseUtils.okOrNotFoundResponse;
 import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
 
 @RestController
@@ -37,10 +38,7 @@ public class ItemController {
 
     @RequestMapping("/get/{id}")
     public ApiResponse<Item> getItem(@PathVariable("id") Long id) {
-        Item item = new Item();
-        item.setId(id);
-        item.setName("test item");
-        return wrapResponse(item);
+        return okOrNotFoundResponse("Item " + id + " not found", itemService.getById(id));
     }
 
     @RequestMapping("/getByUser/{id}")
