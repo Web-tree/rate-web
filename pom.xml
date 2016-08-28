@@ -158,21 +158,14 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>generate-resources</phase>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <jsonLibrary>jackson2</jsonLibrary>
                             <classPatterns>
                                 <pattern>org.webtree.rate.web.model.*</pattern>
                             </classPatterns>
-                            <!--<outputFile>target/rest</outputFile>-->
                             <outputKind>global</outputKind>
-                            <!--<classPatterns>-->
-                            <!--<pattern>-->
-                            <!--org.webtree.rate.web.model.*-->
-                            <!--</pattern>-->
-                            <!--</classPatterns>-->
-                            <outputFile>src/main/resources/public/app/model.d.ts</outputFile>
-                            <!--<namespace>Rest</namespace>-->
+                            <outputFile>target/classes/public/app/model.d.ts</outputFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -189,11 +182,11 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
-                        <phase>generate-resources</phase>
+                        <phase>generate-sources</phase>
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <phase>generate-resources</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
