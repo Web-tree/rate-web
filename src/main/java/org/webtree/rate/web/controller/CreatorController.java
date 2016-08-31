@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
 
-import static org.webtree.rate.web.utils.ResponseUtils.okResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
 
 /**
  * @author Max
@@ -21,6 +21,6 @@ public class CreatorController {
 
     @RequestMapping("/getRating")
     public ApiResponse<Integer> getRating() {
-        return okResponse(0);
+        return ok(0);
     }
 }

@@ -14,11 +14,12 @@ import org.webtree.rate.web.model.Item;
 import org.webtree.rate.web.model.Project;
 import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.ItemService;
+import org.webtree.rate.web.utils.ResponseUtils;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtils.okOrNotFoundResponse;
-import static org.webtree.rate.web.utils.ResponseUtils.okResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
+import static org.webtree.rate.web.utils.ResponseUtils.okOrNotFound;
 
 @RestController
 @RequestMapping("/rest/item")
@@ -33,12 +34,12 @@ public class ItemController {
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
     @Secured("ROLE_USER")
     public ApiResponse<Item> createItem(@RequestBody Item item) {
-        return okResponse(itemService.create(item));
+        return ResponseUtils.ok(itemService.create(item));
     }
 
     @RequestMapping("/get/{id}")
     public ApiResponse<Item> getItem(@PathVariable("id") Long id) {
-        return okOrNotFoundResponse("Item " + id + " not found", itemService.getById(id));
+        return okOrNotFound("Item " + id + " not found", itemService.getById(id));
     }
 
     @RequestMapping("/getByUser/{id}")
@@ -49,7 +50,7 @@ public class ItemController {
         creator.setDisplayName("test user");
         creator.setId(id);
         item.setCreator(creator);
-        return okResponse(Lists.newArrayList(item));
+        return ok(Lists.newArrayList(item));
     }
 
     @RequestMapping("/getByProject/{id}")
@@ -60,6 +61,6 @@ public class ItemController {
         project.setUrl("test.url");
         item.setProjects(Lists.newArrayList(project));
         item.setProjects(Lists.newArrayList(project));
-        return okResponse(Lists.newArrayList(item));
+        return ok(Lists.newArrayList(item));
     }
 }
