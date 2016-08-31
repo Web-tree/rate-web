@@ -13,8 +13,8 @@ import java.util.List;
 
 import static org.webtree.rate.web.model.ApiResponseType.BAD_REQUEST;
 import static org.webtree.rate.web.model.ApiResponseType.NOT_FOUND;
-import static org.webtree.rate.web.utils.ResponseUtils.okResponse;
-import static org.webtree.rate.web.utils.ResponseUtils.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
+import static org.webtree.rate.web.utils.ResponseUtils.wrap;
 
 /**
  * @author Max
@@ -29,31 +29,31 @@ public class UserController {
     public ApiResponse<User> getInfo(@PathVariable("userId") Long userId) {
         User user = userService.findUserById(userId);
         if (user == null) {
-            return wrapResponse(NOT_FOUND, "User " + userId + " not found");
+            return wrap(NOT_FOUND, "User " + userId + " not found");
         }
-        return okResponse(user);
+        return ok(user);
     }
 
     @RequestMapping("/rate-list")
     public ApiResponse<List<User>> getRateList() {
-        return okResponse(userService.getUserRankTop());
+        return ok(userService.getUserRankTop());
     }
 
     @RequestMapping("/currentUser")
     @Secured("ROLE_USER")
     public ApiResponse<User> getCurrentUser() {
-        return okResponse((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return ok((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
 
     @RequestMapping(value = "/isValidUsername", method = RequestMethod.POST)
     public ApiResponse checkUserName(@RequestParam String username) {
         if (StringUtils.isEmpty(username)) {
-            return wrapResponse(BAD_REQUEST, "Username is empty");
+            return wrap(BAD_REQUEST, "Username is empty");
         }
         if (userService.isUsernameExists(username)) {
-            return wrapResponse(BAD_REQUEST, "Username already exists");
+            return wrap(BAD_REQUEST, "Username already exists");
         }
-        return okResponse();
+        return ok();
     }
 
     @Autowired

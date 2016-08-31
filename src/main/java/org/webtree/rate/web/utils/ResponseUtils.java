@@ -17,31 +17,35 @@ public final class ResponseUtils {
     private ResponseUtils() {
     }
 
-    public static <T> ApiResponse<T> okResponse() {
+    public static <T> ApiResponse<T> ok() {
         return new ApiResponse<>(newStatus());
     }
 
-    public static <T> ApiResponse<T> okResponse(T data) {
+    public static <T> ApiResponse<T> ok(T data) {
         return new ApiResponse<>(newStatus(), data);
     }
 
-    public static <T> ApiResponse<T> wrapResponse(ApiResponseType status, String message) {
+    public static <T> ApiResponse<T> wrap(ApiResponseType status, String message) {
         return new ApiResponse<>(newStatus(status, message));
     }
 
-    public static <T> ApiResponse<T> wrapResponse(ApiResponseType status, String message, T data) {
+    public static <T> ApiResponse<T> wrap(ApiResponseType status, String message, T data) {
         return new ApiResponse<>(newStatus(status, message), data);
     }
 
-    public static <T> ApiResponse<T> wrapResponse(ApiResponseType status, T data) {
+    public static <T> ApiResponse<T> wrap(ApiResponseType status, T data) {
         return new ApiResponse<>(newStatus(status), data);
     }
 
-    public static <T> ApiResponse<T> okOrNotFoundResponse(String notFoundMessage, T data) {
+    public static <T> ApiResponse<T> wrap(ApiResponseType status) {
+        return new ApiResponse<>(newStatus(status));
+    }
+
+    public static <T> ApiResponse<T> okOrNotFound(String notFoundMessage, T data) {
         if (data == null || (data instanceof Collection && ((Collection) data).isEmpty())) {
-            return wrapResponse(NOT_FOUND, notFoundMessage);
+            return wrap(NOT_FOUND, notFoundMessage);
         } else {
-            return okResponse(data);
+            return ok(data);
         }
     }
 
