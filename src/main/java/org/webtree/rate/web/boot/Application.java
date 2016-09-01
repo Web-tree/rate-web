@@ -3,7 +3,6 @@ package org.webtree.rate.web.boot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @author Max
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @SpringBootApplication
 @ComponentScan({
+        "org.webtree.rate.web.advice",
         "org.webtree.rate.web.controller",
         "org.webtree.rate.web.handler",
         "org.webtree.rate.web.security",

@@ -10,17 +10,17 @@
             </ul>
             <div class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li *ngIf="!isAuth()">
-                        <a class="nav-link" (click)="username()">Login</a>
+                    <li *ngIf="!checkAuth()">
+                        <a class="nav-link" (click)="signIn()">Login</a>
                     </li>
                     <li *ngIf="getCurrentUser()">
                         <a class="nav-link" [routerLink]="['/user/details/', getCurrentUser().id]">
                             {{getCurrentUser().displayName}}
                         </a>
                     </li>
-                    <li *ngIf="isAuth()">
+                    <li *ngIf="checkAuth()">
 
-                        <a class="nav-link" (click)="logout()">Logout</a>
+                        <a class="nav-link" (click)="signOut()">Logout</a>
                     </li>
                 </ul>
             </div>

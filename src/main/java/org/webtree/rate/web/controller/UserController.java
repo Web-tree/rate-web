@@ -2,17 +2,19 @@ package org.webtree.rate.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.User;
 import org.webtree.rate.web.service.UserService;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.model.ApiResponseType.BAD_REQUEST;
+import static org.webtree.rate.web.model.ApiResponseType.NOT_FOUND;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
+import static org.webtree.rate.web.utils.ResponseUtils.wrap;
 
 /**
  * @author Max
@@ -23,23 +25,35 @@ import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
 public class UserController {
     private UserService userService;
 
-    @RequestMapping("/info")
-    public ApiResponse<User> getInfo(@RequestParam Long userId) {
-        return wrapResponse(userService.findUserById(userId));
+    @RequestMapping("/{userId}")
+    public ApiResponse<User> getInfo(@PathVariable("userId") Long userId) {
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            return wrap(NOT_FOUND, "User " + userId + " not found");
+        }
+        return ok(user);
     }
 
     @RequestMapping("/rate-list")
     public ApiResponse<List<User>> getRateList() {
-        return wrapResponse(userService.getUserRankTop());
+        return ok(userService.getUserRankTop());
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.PUT)
-    public ApiResponse register(@RequestParam String username, @RequestParam String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setDisplayName(username);
-        return wrapResponse(userService.createUser(user));
+    @RequestMapping("/currentUser")
+    @Secured("ROLE_USER")
+    public ApiResponse<User> getCurrentUser() {
+        return ok((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    }
+
+    @RequestMapping(value = "/isValidUsername", method = RequestMethod.POST)
+    public ApiResponse checkUserName(@RequestParam String username) {
+        if (StringUtils.isEmpty(username)) {
+            return wrap(BAD_REQUEST, "Username is empty");
+        }
+        if (userService.isUsernameExists(username)) {
+            return wrap(BAD_REQUEST, "Username already exists");
+        }
+        return ok();
     }
 
     @Autowired

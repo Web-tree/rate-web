@@ -53,6 +53,11 @@
             <artifactId>spring-data-neo4j</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.innerloop</groupId>
+            <artifactId>java-neo4j-ogm</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
@@ -146,28 +151,23 @@
             <plugin>
                 <groupId>cz.habarta.typescript-generator</groupId>
                 <artifactId>typescript-generator-maven-plugin</artifactId>
-                <version>1.10.212</version>
+                <version>1.10.220</version>
                 <executions>
                     <execution>
                         <id>generate</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>process-classes</phase>
+                        <!--<phase>prepare-package</phase>-->
                         <configuration>
                             <jsonLibrary>jackson2</jsonLibrary>
                             <classPatterns>
                                 <pattern>org.webtree.rate.web.model.*</pattern>
                             </classPatterns>
-                            <!--<outputFile>target/rest</outputFile>-->
-                            <outputKind>global</outputKind>
-                            <!--<classPatterns>-->
-                            <!--<pattern>-->
-                            <!--org.webtree.rate.web.model.*-->
-                            <!--</pattern>-->
-                            <!--</classPatterns>-->
-                            <outputFile>src/main/resources/public/app/model.d.ts</outputFile>
-                            <!--<namespace>Rest</namespace>-->
+                            <!--<outputKind>global</outputKind>-->
+                            <outputFileType>implementationFile</outputFileType>
+                            <outputFile>src/main/resources/public/app/model.ts</outputFile>
+                            <outputKind>module</outputKind>
                         </configuration>
                     </execution>
                 </executions>
@@ -184,11 +184,11 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
-                        <phase>generate-resources</phase>
+                        <!--<phase>generate-sources</phase>-->
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <phase>generate-resources</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>

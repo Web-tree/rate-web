@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
 import {UserService} from "./user.service";
-import {httpFactory} from "@angular/http";
 import {ActivatedRoute} from "@angular/router";
+import {User} from "./model";
 @Component({
     selector: 'user-details-comp',
     templateUrl: 'templates/user-details.html',

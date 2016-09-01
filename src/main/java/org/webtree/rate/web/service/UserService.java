@@ -41,4 +41,8 @@ public class UserService extends GraphService<User, UserRepository> implements U
         user.setPassword("test");
         return user;
     }
+
+    public boolean isUsernameExists(String username) {
+        return repository.isUsernameExists(username);
+    }
 }

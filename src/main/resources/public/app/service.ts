@@ -1,5 +1,3 @@
-import {Http} from "@angular/http";
-import {Injectable} from "@angular/core";
 export abstract class Service {
     private baseUrl: string = "/rest/";
 
@@ -14,4 +12,7 @@ export abstract class Service {
         return url;
     }
 
+    protected setBaseUrl(url: string) {
+        this.baseUrl = url
+    }
 }

@@ -5,5 +5,5 @@ package org.webtree.rate.web.model;
  *         Created on 8/6/2016.
  */
 public enum ItemType {
-
+    ARTICLE, SONG, CODE
 }

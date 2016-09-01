@@ -6,22 +6,20 @@ package org.webtree.rate.web.controller;
  */
 
 import com.google.common.collect.Lists;
-import com.google.protobuf.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.webtree.rate.web.model.ApiResponse;
 import org.webtree.rate.web.model.Item;
 import org.webtree.rate.web.model.Project;
 import org.webtree.rate.web.model.User;
-import org.webtree.rate.web.repository.ItemRepository;
 import org.webtree.rate.web.service.ItemService;
-import org.webtree.rate.web.utils.ResponseUtil;
+import org.webtree.rate.web.utils.ResponseUtils;
 
 import java.util.List;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
+import static org.webtree.rate.web.utils.ResponseUtils.okOrNotFound;
 
 @RestController
 @RequestMapping("/rest/item")
@@ -36,15 +34,12 @@ public class ItemController {
     @RequestMapping(value = "/create", method = RequestMethod.PUT)
     @Secured("ROLE_USER")
     public ApiResponse<Item> createItem(@RequestBody Item item) {
-        return wrapResponse(itemService.create(item));
+        return ResponseUtils.ok(itemService.create(item));
     }
 
     @RequestMapping("/get/{id}")
     public ApiResponse<Item> getItem(@PathVariable("id") Long id) {
-        Item item = new Item();
-        item.setId(id);
-        item.setName("test item");
-        return wrapResponse(item);
+        return okOrNotFound("Item " + id + " not found", itemService.getById(id));
     }
 
     @RequestMapping("/getByUser/{id}")
@@ -55,7 +50,7 @@ public class ItemController {
         creator.setDisplayName("test user");
         creator.setId(id);
         item.setCreator(creator);
-        return wrapResponse(Lists.newArrayList(item));
+        return ok(Lists.newArrayList(item));
     }
 
     @RequestMapping("/getByProject/{id}")
@@ -66,6 +61,6 @@ public class ItemController {
         project.setUrl("test.url");
         item.setProjects(Lists.newArrayList(project));
         item.setProjects(Lists.newArrayList(project));
-        return wrapResponse(Lists.newArrayList(item));
+        return ok(Lists.newArrayList(item));
     }
 }

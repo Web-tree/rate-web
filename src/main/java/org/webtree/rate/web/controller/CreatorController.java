@@ -1,12 +1,11 @@
 package org.webtree.rate.web.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.webtree.rate.web.model.ApiResponse;
 
-import static org.webtree.rate.web.utils.ResponseUtil.wrapResponse;
+import static org.webtree.rate.web.utils.ResponseUtils.ok;
 
 /**
  * @author Max
@@ -22,6 +21,6 @@ public class CreatorController {
 
     @RequestMapping("/getRating")
     public ApiResponse<Integer> getRating() {
-        return wrapResponse(0);
+        return ok(0);
     }
 }
