@@ -97,6 +97,7 @@
 
 
     <build>
+        <finalName>rate-web</finalName>
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>
@@ -236,14 +237,20 @@
                 <!--</configuration>-->
             <!--</plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>rate-web</finalName>
+                    <executable>true</executable>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>com.ppedregal.typescript</groupId>
+                <artifactId>typescript-maven-plugin</artifactId>
+                <configuration>
+                    <sourceDirectory>src/main/resources/public/app</sourceDirectory>
+                    <targetDirectory>target/classes/public/app</targetDirectory>
+                </configuration>
+            </plugin>
         </plugins>
         
     </build>
@@ -256,7 +263,12 @@
             <!--</snapshots>-->
         <!--</repository>-->
     <!--</repositories>-->
-    <!--<pluginRepositories>-->
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>typescript-maven-plugin</id>
+            <url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>
+        </pluginRepository>
         <!--<pluginRepository>-->
             <!--<id>spring-milestones</id>-->
             <!--<url>http://repo.spring.io/libs-snapshot</url>-->
@@ -264,5 +276,5 @@
                 <!--<enabled>true</enabled>-->
             <!--</snapshots>-->
         <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
+    </pluginRepositories>
 </project>
