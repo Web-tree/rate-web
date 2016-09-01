@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.web-tree.rate.web</groupId>
     <artifactId>rate-web</artifactId>
-    <version>0.0.1</version>
+    <version>${rateweb-version}</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,6 +16,7 @@
     </parent>
 
     <properties>
+        <rateweb-version>0.0.1</rateweb-version>
         <java.version>1.8</java.version>
         <!--<spring-data-releasetrain.version>Hopper-M1</spring-data-releasetrain.version>-->
         <start-class>org.webtree.rate.web.boot.Application</start-class>
@@ -93,6 +94,7 @@
             <version>0.6.0</version>
         </dependency>
     </dependencies>
+
 
     <build>
         <extensions>
@@ -223,7 +225,24 @@
                     <!--</execution>-->
                 <!--</executions>-->
             <!--</plugin>-->
-
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>tomcat-maven-plugin</artifactId>-->
+                <!--<version>1.1</version>-->
+                <!--<configuration>-->
+                    <!--<path>/</path>-->
+                    <!--<url>http://localhost:8080/manager</url>-->
+                    <!--<server>rate-web.local</server>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <finalName>rate-web</finalName>
+                </configuration>
+            </plugin>
 
         </plugins>
         
