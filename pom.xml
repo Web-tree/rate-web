@@ -246,6 +246,7 @@
             <plugin>
                 <groupId>com.ppedregal.typescript</groupId>
                 <artifactId>typescript-maven-plugin</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
                 <configuration>
                     <sourceDirectory>src/main/resources/public/app</sourceDirectory>
                     <targetDirectory>target/classes/public/app</targetDirectory>
