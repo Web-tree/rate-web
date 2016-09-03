@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.web-tree.rate.web</groupId>
     <artifactId>rate-web</artifactId>
-    <version>0.0.1</version>
+    <version>${rateweb-version}</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,6 +16,7 @@
     </parent>
 
     <properties>
+        <rateweb-version>0.0.1</rateweb-version>
         <java.version>1.8</java.version>
         <!--<spring-data-releasetrain.version>Hopper-M1</spring-data-releasetrain.version>-->
         <start-class>org.webtree.rate.web.boot.Application</start-class>
@@ -94,7 +95,9 @@
         </dependency>
     </dependencies>
 
+
     <build>
+        <finalName>rate-web</finalName>
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>
@@ -223,8 +226,31 @@
                     <!--</execution>-->
                 <!--</executions>-->
             <!--</plugin>-->
-
-
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>tomcat-maven-plugin</artifactId>-->
+                <!--<version>1.1</version>-->
+                <!--<configuration>-->
+                    <!--<path>/</path>-->
+                    <!--<url>http://localhost:8080/manager</url>-->
+                    <!--<server>rate-web.local</server>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.ppedregal.typescript</groupId>
+                <artifactId>typescript-maven-plugin</artifactId>
+                <configuration>
+                    <sourceDirectory>src/main/resources/public/app</sourceDirectory>
+                    <targetDirectory>target/classes/public/app</targetDirectory>
+                </configuration>
+            </plugin>
         </plugins>
         
     </build>
@@ -237,7 +263,12 @@
             <!--</snapshots>-->
         <!--</repository>-->
     <!--</repositories>-->
-    <!--<pluginRepositories>-->
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>typescript-maven-plugin</id>
+            <url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>
+        </pluginRepository>
         <!--<pluginRepository>-->
             <!--<id>spring-milestones</id>-->
             <!--<url>http://repo.spring.io/libs-snapshot</url>-->
@@ -245,5 +276,5 @@
                 <!--<enabled>true</enabled>-->
             <!--</snapshots>-->
         <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
+    </pluginRepositories>
 </project>
