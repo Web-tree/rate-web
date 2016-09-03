@@ -200,6 +200,16 @@
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run tsc</arguments>
+                            <workingDirectory>${project.basedir}/src/main/resources/public/app</workingDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
 
                 <configuration>
@@ -243,17 +253,8 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.ppedregal.typescript</groupId>
-                <artifactId>typescript-maven-plugin</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <configuration>
-                    <sourceDirectory>src/main/resources/public/app</sourceDirectory>
-                    <targetDirectory>target/classes/public/app</targetDirectory>
-                </configuration>
-            </plugin>
         </plugins>
-        
+
     </build>
     <!--<repositories>-->
         <!--<repository>-->
@@ -266,10 +267,10 @@
     <!--</repositories>-->
 
     <pluginRepositories>
-        <pluginRepository>
-            <id>typescript-maven-plugin</id>
-            <url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>
-        </pluginRepository>
+        <!--<pluginRepository>-->
+            <!--<id>typescript-maven-plugin</id>-->
+            <!--<url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>-->
+        <!--</pluginRepository>-->
         <!--<pluginRepository>-->
             <!--<id>spring-milestones</id>-->
             <!--<url>http://repo.spring.io/libs-snapshot</url>-->
