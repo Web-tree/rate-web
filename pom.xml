@@ -169,7 +169,7 @@
                             </classPatterns>
                             <!--<outputKind>global</outputKind>-->
                             <outputFileType>implementationFile</outputFileType>
-                            <outputFile>src/main/resources/public/app/model.ts</outputFile>
+                            <outputFile>target/classes/public/app/model.ts</outputFile>
                             <outputKind>module</outputKind>
                         </configuration>
                     </execution>
@@ -227,7 +227,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run tsc</arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
                         </configuration>
                     </execution>
                 </executions>
