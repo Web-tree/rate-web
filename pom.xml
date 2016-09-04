@@ -161,7 +161,7 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>compile</phase>
+                        <!--<phase>prepare-package</phase>-->
                         <configuration>
                             <jsonLibrary>jackson2</jsonLibrary>
                             <classPatterns>
@@ -184,7 +184,6 @@
                 <executions>
                     <execution>
                         <id>install node and npm</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
@@ -192,8 +191,6 @@
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <!--<phase>compile</phase>-->
-                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -204,7 +201,6 @@
                     </execution>
                     <execution>
                         <id>install typings</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -215,7 +211,6 @@
                     </execution>
                     <execution>
                         <id>run typings install</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -226,10 +221,10 @@
                     </execution>
                     <execution>
                         <id>npm run build</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run tsc</arguments>
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
