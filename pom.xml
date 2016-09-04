@@ -187,6 +187,7 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
+                        <phase>prepare-package</phase>
                         <!--<phase>generate-sources</phase>-->
                     </execution>
                     <execution>
@@ -194,9 +195,10 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <arguments>install</arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -204,9 +206,10 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <arguments>install typings</arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -214,9 +217,10 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run typings install</arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
