@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {Service} from "./service";
 import {Response, Http} from "@angular/http";
 import {Observable} from "rxjs";
-import * as Collections from "typescript-collections";
 import {User} from "./model";
 @Injectable()
 export class UserService extends Service {
@@ -27,9 +26,9 @@ export class UserService extends Service {
             .map((r: Response) => r.json().data as User);
     }
 
-    public getRateList(): Observable<Collections.List<User>> {
+    public getRateList(): Observable<User[]> {
         return this.http
             .get(this.url('rate-list'))
-            .map((r: Response) => r.json().data as User);
+            .map((r: Response) => r.json().data as User[]);
     }
 }
