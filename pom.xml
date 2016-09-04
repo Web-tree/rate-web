@@ -191,7 +191,7 @@
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <phase>compile</phase>
+                        <!--<phase>compile</phase>-->
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -200,11 +200,41 @@
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>install typings</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install typings</arguments>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>run typings install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run typings install</arguments>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run tsc</arguments>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
 
                 <configuration>
-                    <nodeVersion>v6.3.1</nodeVersion>
-                    <npmVersion>3.10.3</npmVersion>
+                    <nodeVersion>v6.5.0</nodeVersion>
+                    <npmVersion>3.10.6</npmVersion>
                     <installDirectory>target</installDirectory>
                 </configuration>
             </plugin>
@@ -243,17 +273,8 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.ppedregal.typescript</groupId>
-                <artifactId>typescript-maven-plugin</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <configuration>
-                    <sourceDirectory>src/main/resources/public/app</sourceDirectory>
-                    <targetDirectory>target/classes/public/app</targetDirectory>
-                </configuration>
-            </plugin>
         </plugins>
-        
+
     </build>
     <!--<repositories>-->
         <!--<repository>-->
@@ -266,10 +287,10 @@
     <!--</repositories>-->
 
     <pluginRepositories>
-        <pluginRepository>
-            <id>typescript-maven-plugin</id>
-            <url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>
-        </pluginRepository>
+        <!--<pluginRepository>-->
+            <!--<id>typescript-maven-plugin</id>-->
+            <!--<url>https://raw.github.com/ppedregal/typescript-maven-plugin/master/repo</url>-->
+        <!--</pluginRepository>-->
         <!--<pluginRepository>-->
             <!--<id>spring-milestones</id>-->
             <!--<url>http://repo.spring.io/libs-snapshot</url>-->

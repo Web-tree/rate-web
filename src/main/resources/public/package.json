@@ -29,7 +29,8 @@
     "angular2-in-memory-web-api": "0.0.14",
     "bootstrap": "^3.3.7",
     "typescript-collections": "1.0.4",
-    "bootflat": "2.0.4"
+    "bootflat": "2.0.4",
+    "maven-packager": "1.0.5"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
