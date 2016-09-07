@@ -161,7 +161,7 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <!--<phase>prepare-package</phase>-->
+                        <phase>compile</phase>
                         <configuration>
                             <jsonLibrary>jackson2</jsonLibrary>
                             <classPatterns>
@@ -169,7 +169,7 @@
                             </classPatterns>
                             <!--<outputKind>global</outputKind>-->
                             <outputFileType>implementationFile</outputFileType>
-                            <outputFile>target/classes/public/app/model.ts</outputFile>
+                            <outputFile>${project.basedir}/src/main/resources/public/app/model.ts</outputFile>
                             <outputKind>module</outputKind>
                         </configuration>
                     </execution>
@@ -188,7 +188,6 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <phase>prepare-package</phase>
-                        <!--<phase>generate-sources</phase>-->
                     </execution>
                     <execution>
                         <id>npm install</id>
@@ -198,7 +197,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <arguments>install</arguments>
-                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -209,7 +208,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <arguments>install typings</arguments>
-                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -220,7 +219,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run typings install</arguments>
-                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -231,7 +230,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run tsc</arguments>
-                            <workingDirectory>${project.basedir}/target/classes/public</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -277,8 +276,29 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/target/classes/public/app</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/public/app</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-
     </build>
     <!--<repositories>-->
         <!--<repository>-->
