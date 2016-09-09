@@ -214,28 +214,28 @@
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>run typings install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <arguments>run typings install</arguments>
-                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
-                        </configuration>
-                    </execution>
                     <!--<execution>-->
-                        <!--<id>npm run build</id>-->
+                        <!--<id>run typings install</id>-->
                         <!--<goals>-->
                             <!--<goal>npm</goal>-->
                         <!--</goals>-->
-                        <!--<phase>package</phase>-->
+                        <!--<phase>prepare-package</phase>-->
                         <!--<configuration>-->
-                            <!--<arguments>run tsc</arguments>-->
+                            <!--<arguments>run typings install</arguments>-->
                             <!--<workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>-->
                         <!--</configuration>-->
                     <!--</execution>-->
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <arguments>run tsc</arguments>
+                            <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
 
                 <configuration>
