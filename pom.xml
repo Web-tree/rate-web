@@ -195,14 +195,14 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                     </execution>
                     <execution>
                         <id>npm install</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <arguments>install</arguments>
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
@@ -213,7 +213,7 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <arguments>install typings</arguments>
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
@@ -224,7 +224,7 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <arguments>run typings install</arguments>
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
@@ -235,7 +235,7 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <configuration>
                             <arguments>run tsc</arguments>
                             <workingDirectory>${project.basedir}/src/main/resources/public</workingDirectory>
@@ -284,7 +284,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
