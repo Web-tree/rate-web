@@ -1,6 +1,7 @@
 # Created by .gitignore support plugin (hsz.mobi)
 ### Java template
 *.class
+target/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -40,3 +41,7 @@ $RECYCLE.BIN/
 # js generated files
 /src/main/resources/public/node_modules/
 /src/main/resources/public/app/model.ts
+node_modules/
+rate-web.db/
+src/assembly/
+src/main/resources/public/app/*.js
