@@ -1,35 +1,39 @@
 import {Component} from "@angular/core";
 import {ROUTER_DIRECTIVES} from "@angular/router";
 import {UserService} from "./user.service";
-import {SecurityService} from "./security.service";
+import {TokenService} from "./token.service";
 import {User} from "./model";
+import {RestHandlersHolder} from "./rest.handlers";
+import {UserRateListComponent} from "./user-rate-list.component";
+import {HomeComponent} from "./home.component";
 
 @Component({
     selector: 'rate-app',
     templateUrl: 'templates/app.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [UserService, SecurityService]
+    precompile: [UserRateListComponent, HomeComponent],
+    providers: [UserService, TokenService, RestHandlersHolder]
 })
 export class AppComponent {
-    constructor(private userService: UserService, private securityService: SecurityService) {
+    constructor(private userService: UserService, private securityService: TokenService) {
         //TODO: Stub. Remove.
         this.signIn();
     }
 
     public signIn(): void {
         // TODO: remove stub
-        this.securityService.signIn("qwe", "test");
+        this.userService.signIn("qwe", "test");
     }
 
     public signOut(): void {
-        this.securityService.signOut();
+        this.userService.signOut();
     }
 
     public checkAuth(): boolean {
-        return this.securityService.checkAuth();
+        return this.userService.checkAuth();
     }
 
     public getCurrentUser(): User {
-        return this.securityService.getCurrentUser();
+        return this.userService.getCurrentUser();
     }
 }
